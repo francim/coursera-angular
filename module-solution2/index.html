@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="ShoppingListCheckOff">
   <head>
     <title>Shopping List Check Off</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,25 +29,30 @@
   <div class="row">
 
     <!-- To Buy List -->
-    <div class="col-md-6">
+    <div class="col-md-6" ng-controller="ToBuyController as ctrl1">
      <h2>To Buy:</h2>
      <ul>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+       <div ng-repeat="item in items">
+         <li>Buy {{item.item_quantity}} of {{item.item_name}}<button class="btn btn-default" ng-click="buy($index)"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+       </div>
      </ul>
-     <div class="emptyMessage">Everything is bought!</div>
+     <div class="emptyMessage" ng-if="items.length===0">Everything is bought!</div>
     </div>
 
     <!-- Already Bought List -->
-    <div class="col-md-6">
+    <div class="col-md-6" ng-controller="AlreadyBoughtController as ctrl1">
      <h2>Already Bought:</h2>
      <ul>
-       <li>Bought 10 cookies</li>
+       <div ng-repeat="item in items">
+         <li>Buy {{item.item_quantity}} of {{item.item_name}}<button class="btn btn-default" ng-click="removeBought($index)"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+       </div>
      </ul>
-     <div class="emptyMessage">Nothing bought yet.</div>
+     <div class="emptyMessage" ng-if="items.length===0">Nothing bought yet.</div>
     </div>
   </div>
 </div>
 
+<script src="lib/angular.min.js"></script>
+<script src="lib/app.js"></script>
 </body>
 </html>
